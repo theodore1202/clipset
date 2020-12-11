@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <button v-on:click='onClick()'>{{ msg }}</button>
+    <button v-on:click='onClick()'>{{ show }}</button>
   </div>
 </template>
 
@@ -14,17 +14,40 @@
     navigator.clipboard.writeText(this.cValue)
   }
 
+
+function pollclip()
+{
+  var self = this
+  
+   /* eslint-disable no-unused-vars  */
+    navigator.clipboard.readText().then (text =>  { self.show = text }).catch(err => {})
+
+  setTimeout(self.pollclip,5)
+}
+
+function mounted()
+{
+  this.show = this.msg;
+  this.pollclip();
+}
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String,
     cValue: String
   },
+  data()
+  {
+    return { show: this.show }
+  },
   methods:
   {
-    onClick: onClick
-  
-  }
+    onClick: onClick  ,
+    pollclip: pollclip
+  },
+  mounted: mounted
+ 
 }
 </script>
 
