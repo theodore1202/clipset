@@ -1,11 +1,16 @@
 <template>
   <div class="hello">
-    <button v-on:click='onClick()'>{{ msg }}</button>
-    <text>{{show}}</text>
+    <button v-on:click='onClick()'  
+    :class="{ 'Passive': classInUse === 'Passive',
+              'Active' : classInUse === 'Active',
+              'Dormant' : classInUse === 'Dormant' }"
+      >{{ msg }}</button>
+  <!--  <text>{{show}}</text> !-->
   </div>
 </template>
 
 <script>
+ 
 
   function onClick()
   {
@@ -25,7 +30,7 @@ function setError()
   console.log("ErrCount="+this.errCount)
   if(this.errCount===10)
   {
-      setDormant()      
+      this.setDormant()      
   }
   setTimeout(this.pollclip,1000)
 }
@@ -42,6 +47,7 @@ function doThen(text)
     setTimeout(this.pollclip,1000)
 }
 
+
 function pollclip()
 {
 
@@ -52,29 +58,34 @@ function pollclip()
 
 function setActive()
 {
+    this.classInUse = 'Active'
     console.log("Active")
 }
  
  function setDormant()
 {
+   this.classInUse = 'Dormant'
     console.log("Dormant")
 }
  
  function setPassive()
 {
+    this.classInUse = 'Passive'
     console.log("Passive")
 }
  
 
 export default {
   name: 'HelloWorld',
+  classInUse: 'Passive',
+
   props: {
     msg: String,
     cValue: String
   },
   data()
   {
-    return { show: this.show }
+    return { show: this.show, classInUse: this.classInUse  }
   },
   methods:
   {
@@ -84,25 +95,25 @@ export default {
     setDormant,
     setPassive,
     setError, doThen
-  }
+  },
+ mounted()
+  { this.classInUse='Passive'}
  
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  .Passive
+  {
+    background-color: #0000FF;
+  }
+    .Active
+  {
+    background-color: #00FF00;
+  }
+  .Dormant
+  {
+    background-color: #FF0000;
+  }
 </style>
