@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <button v-on:click='onClick()'>{{ show }}</button>
+    <button v-on:click='onClick()'>{{ msg }}</button>
+    <text>{{show}}</text>
   </div>
 </template>
 
@@ -12,24 +13,58 @@
     console.log(navigator)
     console.log(navigator.clipboard)
     navigator.clipboard.writeText(this.cValue)
+    this.errCount=0
+
+    this.pollclip()
   }
 
+function setError()
+{
+  console.log("SetError")
+  this.errCount+=1
+  console.log("ErrCount="+this.errCount)
+  if(this.errCount===10)
+  {
+      setDormant()      
+  }
+  setTimeout(this.pollclip,1000)
+}
+
+function doThen(text)
+{
+    this.errCount = 0;
+     if(text!==this.cValue)
+    {
+      this.setPassive()
+      return 
+    }
+    this.setActive();
+    setTimeout(this.pollclip,1000)
+}
 
 function pollclip()
 {
-  var self = this
-  
+
    /* eslint-disable no-unused-vars  */
-    navigator.clipboard.readText().then (text =>  { self.show = text }).catch(err => {})
-
-  setTimeout(self.pollclip,5)
+  navigator.clipboard.readText().then (text =>  { this.doThen(text) }).catch(rr => { this.setError() })
+  
 }
 
-function mounted()
+function setActive()
 {
-  this.show = this.msg;
-  this.pollclip();
+    console.log("Active")
 }
+ 
+ function setDormant()
+{
+    console.log("Dormant")
+}
+ 
+ function setPassive()
+{
+    console.log("Passive")
+}
+ 
 
 export default {
   name: 'HelloWorld',
@@ -44,9 +79,12 @@ export default {
   methods:
   {
     onClick: onClick  ,
-    pollclip: pollclip
-  },
-  mounted: mounted
+    pollclip: pollclip,
+    setActive,
+    setDormant,
+    setPassive,
+    setError, doThen
+  }
  
 }
 </script>
