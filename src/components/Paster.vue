@@ -1,11 +1,12 @@
 <template>
   <div class="hello">
     <button v-on:click='onClick()'  
-    :class="{ 'Passive': classInUse === 'Passive',
+    :class="{ 'GlobalClass': true,
+              'Passive': classInUse === 'Passive',
               'Active' : classInUse === 'Active',
               'Dormant' : classInUse === 'Dormant' }"
       >{{ msg }}</button>
-  <!--  <text>{{show}}</text> !-->
+   <text>{{msg}}</text>  
   </div>
 </template>
 
@@ -28,7 +29,7 @@ function setError()
   console.log("SetError")
   this.errCount+=1
   console.log("ErrCount="+this.errCount)
-  if(this.errCount===10)
+  if(this.errCount===5)
   {
       this.setDormant()      
   }
@@ -106,14 +107,20 @@ export default {
 <style scoped>
   .Passive
   {
-    background-color: #0000FF;
+    background-color: #FFFFFF;
+    
   }
     .Active
   {
-    background-color: #00FF00;
+    background-color: #b0b0ff;
   }
   .Dormant
   {
-    background-color: #FF0000;
+    background-color: #dddddd;
+  }
+  .GlobalClass
+  {
+     width: 200px;
+    left: 0px;
   }
 </style>

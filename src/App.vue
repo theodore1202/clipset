@@ -1,17 +1,28 @@
 <template>
-  <div id="app">
-  
-    <HelloWorld msg="Welcome to Your Vue.js App" cValue="Push Again"/>
+  <div id="app" >
+    <li v-for="child in theList" :key="child.msg" id="list">
+        <paster :msg=child.msg :cValue=child.cValue />
+  </li>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Paster from './components/Paster.vue'
 
 export default {
-  name: 'App',
+  name: 'ClipSet',
   components: {
-    HelloWorld
+     Paster
+  },
+  data()
+  {
+    return {
+       theList: [
+           { msg: "mantech\\tprevalsky", cValue:"mantech\\tprevalsky"},
+           { msg: "tprevalsky", cValue:"tprevalsky"},
+           { msg: "mantech:password", cValue:"e5yi7M8T#@"}
+       ]
+    }
   }
 }
 </script>
@@ -22,7 +33,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #2c3e50;   
   margin-top: 60px;
 }
+#list{ align-items: flex-start;}
 </style>
