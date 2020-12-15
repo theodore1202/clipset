@@ -1,8 +1,13 @@
 <template>
-  <div id="app" >
+<div style='max-width:300px;background-color:#000000;' >
+  <div style="background-color:#000000;height:3px" />
+  <div id="app"  style='max-width:290px;background-color:#ffffff;margin:5px;' >
     <li v-for="child in theList" :key="child.msg" id="list">
         <paster :msg=child.msg :cValue=child.cValue />
+       <div style="background-color:#000000;min-height:5px" />
   </li>
+  </div>
+ 
   </div>
 </template>
 
@@ -34,7 +39,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;   
-  margin-top: 60px;
+
 }
-#list{ align-items: flex-start;}
+
 </style>

@@ -1,13 +1,12 @@
 <template>
-  <div class="hello">
+ 
     <button v-on:click='onClick()'  
     :class="{ 'GlobalClass': true,
               'Passive': classInUse === 'Passive',
               'Active' : classInUse === 'Active',
               'Dormant' : classInUse === 'Dormant' }"
-      >{{ msg }}</button>
-   <text>{{msg}}</text>  
-  </div>
+      >{{ msg }}</button> 
+ 
 </template>
 
 <script>
@@ -15,9 +14,6 @@
 
   function onClick()
   {
-    console.log(this.cValue)
-    console.log(navigator)
-    console.log(navigator.clipboard)
     navigator.clipboard.writeText(this.cValue)
     this.errCount=0
 
@@ -121,6 +117,6 @@ export default {
   .GlobalClass
   {
      width: 200px;
-    left: 0px;
+     margin-bottom: 3px;
   }
 </style>
