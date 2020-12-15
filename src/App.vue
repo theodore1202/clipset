@@ -14,6 +14,15 @@
 <script>
 import Paster from './components/Paster.vue'
 
+async function getAsset()
+{
+    /* eslint-disable no-unused-vars  */
+    var rc = await fetch('../assets/clipsetdef.json')
+    rc = await rc.text()
+    
+    console.log(rc)
+}
+
 export default {
   name: 'ClipSet',
   components: {
@@ -28,6 +37,10 @@ export default {
            { msg: "mantech:password", cValue:"e5yi7M8T#@"}
        ]
     }
+  },
+  mounted()
+  {
+    getAsset()
   }
 }
 </script>
