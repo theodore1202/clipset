@@ -11,13 +11,22 @@
 
 <script>
  
+ async function processClick()
+ {
+     await  navigator.clipboard.writeText(this.cValue)
+
+      this.pollclip()
+
+      if ( this.url != null)
+      {
+          window.open(this.url,"_blank")
+      }
+ }
 
   function onClick()
   {
-    navigator.clipboard.writeText(this.cValue)
-    this.errCount=0
-
-    this.pollclip()
+      this.errCount=0
+      this.processClick()
   }
 
 function setError()
@@ -78,7 +87,8 @@ export default {
 
   props: {
     msg: String,
-    cValue: String
+    cValue: String,
+    url: String
   },
   data()
   {
@@ -91,7 +101,7 @@ export default {
     setActive,
     setDormant,
     setPassive,
-    setError, doThen
+    setError, doThen, processClick
   },
  mounted()
   { this.classInUse='Passive'}
