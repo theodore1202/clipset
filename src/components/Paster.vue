@@ -116,7 +116,7 @@ export default {
   }
   .GlobalClass
   {
-     width: 200px;
+     width: 280px;
      margin-bottom: 3px;
   }
 </style>

@@ -17,9 +17,9 @@ import Paster from './components/Paster.vue'
 async function getAsset()
 {
     /* eslint-disable no-unused-vars  */
-    var rc = await fetch('../assets/clipsetdef.json')
-    rc = await rc.text()
-    
+    var rc = await fetch('assets/clipsetdefs.json')
+    rc = await rc.json()
+    this.theList = rc
     console.log(rc)
 }
 
@@ -30,17 +30,19 @@ export default {
   },
   data()
   {
+  
     return {
-       theList: [
-           { msg: "mantech\\tprevalsky", cValue:"mantech\\tprevalsky"},
-           { msg: "tprevalsky", cValue:"tprevalsky"},
-           { msg: "mantech:password", cValue:"e5yi7M8T#@"}
-       ]
+       theList: this.theList
     }
   },
   mounted()
   {
-    getAsset()
+    this.theList = []
+    this.getAsset()
+  },
+  methods:
+  {
+    getAsset
   }
 }
 </script>
